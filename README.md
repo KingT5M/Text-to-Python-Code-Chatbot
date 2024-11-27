@@ -15,3 +15,4 @@ The result is returned as a response via an API endpoint.
 This project is ideal for developers looking to explore AI-powered code generation.
 
 Author
+The author is - Ian Mwaniki Kanyi alias King T5M. ALL HAIL T5M.
