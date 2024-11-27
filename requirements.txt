@@ -1,5 +1,6 @@
-Python
-Torch
-Transformers
+python
+torch
+transformers
 datasets
-flasks
+flask
+Pandas
