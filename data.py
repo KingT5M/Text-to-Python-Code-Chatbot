@@ -42,9 +42,15 @@ print (dataset)
 
 #tokenize the data
 tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-350M-mono") #choose tokenizer trained on data with python vocabulary
-#first analyse the tokenization in order to choose an appropriate max lenght
+#first analyse the tokenization in order to choose an appropriate max length
+# Add a padding token
+if tokenizer.pad_token is None:
+    tokenizer.add_special_tokens({'pad_token': '[PAD]'}) # Add the padding token
+# Now you MUST set a max_length based on your data analysis. I'm setting an example value of 512.
+# YOU MUST REPLACE THIS WITH AN APPROPRIATE VALUE BASED ON YOUR LENGTH ANALYSIS
+max_length = 512
 def tokenize_function(examples):
-    return tokenizer(examples['text'], padding = True, truncation = True)
+    return tokenizer(examples['text'], padding = 'max_length', truncation = True, max_length = max_length)
 tokenized_datasets = dataset.map(tokenize_function, batched = True)
 all_lengths = [len(x) for dataset_split in tokenized_datasets.values() for x in dataset_split['input_ids']]
 print(f"Max length: {max(all_lengths)}")  #Print the maximum tokenized sequence length
