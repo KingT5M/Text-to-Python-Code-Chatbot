@@ -62,5 +62,6 @@ trainer.train()
 #EVALUATE ON THE TEST DATA SET
 trainer.evaluate(eval_dataset = tokenized_datasets["test"])
 
-#SAVE THE FINETUNED MODEL
-trainer.save_model("./codegen-350M-mono-finetuned")
+#SAVE THE FINETUNED MODEL AND TOKENIZER
+model.save_pretrained("./codegen-350M-mono-finetuned")
+tokenizer.save_pretrained("./codegen-350M-mono-finetuned")
