@@ -46,3 +46,12 @@ training_args = TrainingArguments(
     greater_is_better = False #ensures lower perplexity signifies best model
 )
 
+#INITIALIZE TRAINER
+trainer = Trainer(
+    model = model,
+    args = training_args,
+    train_dataset = tokenized_datasets["train"],
+    eval_dataset = tokenized_datasets["validation"],
+    tokenizer = tokenizer,
+    compute_metrics = compute_metrics
+)
