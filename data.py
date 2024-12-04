@@ -6,7 +6,7 @@ from transformers import AutoTokenizer
 dataset = load_dataset("iamtarun/python_code_instructions_18k_alpaca")
 dataset.save_to_disk("./raw_dataset")
 
-#PREPROCESS THE DATA
+# STEPS FOR PREPROCESSING THE DATA
 
 #Create a "text" column to keep the feature engineering logic together
 def format_examples(examples):

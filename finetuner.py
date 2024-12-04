@@ -27,7 +27,7 @@ def compute_metrics(eval_pred):
 #DEFINE TRAINING ARGUMENTS
 training_args = TrainingArguments(
     output_dir = "./codegen-350M-mono-finetuned", #location weights, logs and model will be stored
-    per_device_eval_batch_size = 4, #Batch size for training on each device
+    per_device_train_batch_size = 4, #Batch size for training on each device
     per_device_eval_batch_size = 4, #Batch size for evaluation on each device
     gradient_accumulation_steps = 4, #Accumulate gradients over multiple steps to simulate a larger batch size
     evaluation_strategy = "steps", #Evaluate model after a defined number of steps
