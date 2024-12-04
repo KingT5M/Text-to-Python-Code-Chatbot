@@ -55,3 +55,12 @@ trainer = Trainer(
     tokenizer = tokenizer,
     compute_metrics = compute_metrics
 )
+
+#START FINETUNING PROCESS
+trainer.train()
+
+#EVALUATE ON THE TEST DATA SET
+trainer.evaluate(eval_dataset = tokenized_datasets["test"])
+
+#SAVE THE FINETUNED MODEL
+trainer.save_model("./codegen-350M-mono-finetuned")
