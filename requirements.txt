@@ -4,3 +4,4 @@ transformers
 datasets
 flask
 Pandas
+evaluate
