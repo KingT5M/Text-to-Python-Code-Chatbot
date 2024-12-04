@@ -2,8 +2,9 @@
 from datasets import load_dataset, DatasetDict
 from transformers import AutoTokenizer
 
-#DOWNLOAD THE DATASET
+#DOWNLOAD AND SAVE THE DATASET
 dataset = load_dataset("iamtarun/python_code_instructions_18k_alpaca")
+dataset.save_to_disk("./raw_dataset")
 
 #PREPROCESS THE DATA
 
@@ -49,6 +50,6 @@ def tokenize_function(examples):
     return tokenizer(examples['text'], padding = "max_length", truncation = True, max_length = max_length)
 tokenized_datasets = dataset.map(tokenize_function, batched = True, batch_size = 32)
 
-#SAVE TOKENIZED DATASET TO DIRECTORY
-tokenized_datasets.save_to_disk("./tokenized_datasets")  # Saves to a directory named "tokenized_data" in the current directory.
+#SAVE PREPROCESSED DATASET TO DIRECTORY
+tokenized_datasets.save_to_disk("./preprocessed_datasets")  # Saves to a directory named "preprocessed_datasets" in the current directory.
 
