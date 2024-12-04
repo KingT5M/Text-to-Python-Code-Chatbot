@@ -1,7 +1,6 @@
 #IMPORT THE NECESSARY LIBRARIES
 from datasets import load_dataset, DatasetDict
 from transformers import AutoTokenizer
-import numpy as np
 
 #DOWNLOAD THE DATASET
 dataset = load_dataset("iamtarun/python_code_instructions_18k_alpaca")
@@ -49,3 +48,7 @@ max_length = 512
 def tokenize_function(examples):
     return tokenizer(examples['text'], padding = "max_length", truncation = True, max_length = max_length)
 tokenized_datasets = dataset.map(tokenize_function, batched = True, batch_size = 32)
+
+#SAVE TOKENIZED DATASET TO DIRECTORY
+tokenized_datasets.save_to_disk("./tokenized_datasets")  # Saves to a directory named "tokenized_data" in the current directory.
+
