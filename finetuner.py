@@ -4,11 +4,22 @@ import torch
 from datasets import load_from_disk
 import evaluate
 import math 
+import os
 
-#LOAD PREPROCESSED DATA AND MODEL
+# LOAD PREPROCESSED DATA
 tokenized_datasets = load_from_disk("./preprocessed_datasets")
-model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-350M-mono")
-tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-350M-mono")
+
+# DEFINE MODEL DIRECTORY AND CHECK IF MODEL EXISTS
+pretrained_model_dir = "./pretrained_model/Salesforce/codegen-350M-mono"
+if not os.path.exists(pretrained_model_dir):
+    os.makedirs(os.path.dirname(pretrained_model_dir), exist_ok=True)
+    model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-350M-mono")
+    tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-350M-mono")
+    model.save_pretrained(pretrained_model_dir)
+    tokenizer.save_pretrained(pretrained_model_dir)
+else:
+    model = AutoModelForCausalLM.from_pretrained(pretrained_model_dir)
+    tokenizer = AutoTokenizer.from_pretrained(pretrained_model_dir)
 
 #ADD PADDING TOKEN TO THE MODEL YOU HAD ADDED TO THE TOKENIZER
 if tokenizer.pad_token is None:
